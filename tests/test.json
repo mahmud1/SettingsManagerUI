@@ -1,0 +1,60 @@
+{
+    "global setting": {},
+    "test setting": {
+        "Setting block 1": {
+            "dropdown test": {
+                type: "dropdown",
+                value: "Option 1",
+                options: [
+                    "Option 1",
+                    "Option 2",
+                    "test3",
+                ],
+                auto: true,
+            },
+            "test string": {
+                type: "string",
+                value: "test",
+                "default": "test",
+            },
+            "test string2": {
+                type: "string",
+                value: "test",
+                auto: true,
+            },
+            "test float": {
+                type: "float",
+                value: 0.2,
+                "default": 0.2,
+            },
+            "test float2": {
+                type: "float",
+                value: 1.0,
+                auto: true,
+            },
+            test_bool: {
+                type: "bool",
+                value: false,
+                "default": false,
+            },
+            test_int: {
+                type: "int",
+                value: 4,
+                "default": 4,
+            },
+            test_color: {
+                type: "color",
+                value: "#68ff7f",
+                "default": "#68ff7f",
+            },
+        },
+        "Setting block 2": {
+            title: {
+                type: "string",
+                value: "bar",
+                "default": "bar",
+            },
+        },
+    },
+    "other setting": {},
+}
