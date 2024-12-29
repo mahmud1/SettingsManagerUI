@@ -1,3 +1,5 @@
+__version__ = '0.1.0'
+
 try:
     import json5 as json
 except ImportError:
