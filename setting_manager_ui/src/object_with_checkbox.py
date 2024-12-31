@@ -189,6 +189,8 @@ class SpinBoxWithCheckbox(ObjectWithCheckbox):
     :type flag: bool
     :param checkbox: Whether to include a checkbox.
     :type checkbox: bool, optional
+    :param range: The range of the QSpinBox, defaults to [None, None].
+    :type range: list of int, optional
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
@@ -234,6 +236,8 @@ class DoubleSpinBoxWithCheckbox(ObjectWithCheckbox):
     :type flag: bool
     :param checkbox: Whether to include a checkbox.
     :type checkbox: bool, optional
+    :param range: The range of the QDoubleSpinBox, defaults to [None, None].
+    :type range: list of float, optional
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
