@@ -54,7 +54,19 @@
                 value: "bar",
                 "default": "bar",
             },
-        },
+            "test float": {
+                type: "float",
+                value: 0.2,
+                default: 0.2,
+                range: [-99.1, 1]
+            },
+            "test int": {
+                type: "int",
+                value: 2,
+                default: 2,
+                range: [-99, 10]
+            }
+        }
     },
     "other setting": {},
 }
