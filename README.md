@@ -7,14 +7,13 @@ SettingsManagerUI is a package designed to provide a simple and user-friendly in
 
 <img src="docs/screenshot.png" alt="Sample GUI" width="400"/>
 
-# Integrating SettingsManagerUI within Another Package
+## Integrating SettingsManagerUI within Another Package
 To integrate SettingsManagerUI within another package, follow these steps:  
 - Create a JSON Settings File with the appropriate structure.
 - Initialize the SettingsTableDialog: Import and initialize the SettingsTableDialog class with the path to your JSON file and the block key.  
 - Display the Dialog: Use the exec() method to display the settings dialog.
--  
-Here is an example of how to use SettingsManagerUI within another package:
 
+### Here is an example of how to use SettingsManagerUI within another package:
 
 ```python
 # Import the SettingsTableDialog class
@@ -35,7 +34,7 @@ dialog.exec()
 ```
 
 
-## JSON Structure
+### JSON Structure
 
 The JSON file used by SettingsManagerUI should have the following structure:
 
