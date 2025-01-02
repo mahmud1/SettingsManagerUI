@@ -4,6 +4,7 @@ A Python-based user interface for managing dynamic settings.
 ## Overview
 
 SettingsManagerUI is a package designed to provide a simple and user-friendly interface for managing application settings stored in JSON format. It allows users to view, edit, and reset settings through a graphical interface built with PyQt.
+It offers a straightforward and user-friendly way to manage settings stored in JSON format. SettingsManagerUI can use either PySide6 or qgis.PyQt, depending on the environment in which it is deployed. Using qgis.PyQt is particularly useful for developers creating QGIS plugins. 
 
 <img src="docs/screenshot.png" alt="Sample GUI" width="400"/>
 
