@@ -11,6 +11,7 @@
                     "test3",
                 ],
                 auto: true,
+                "default": true
             },
             "test string": {
                 type: "string",
@@ -19,8 +20,9 @@
             },
             "test string2": {
                 type: "string",
-                value: "test",
-                auto: true,
+                value: "",
+                auto: false,
+                "default": false
             },
             "test float": {
                 type: "float",
