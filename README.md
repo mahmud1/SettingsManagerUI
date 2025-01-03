@@ -45,9 +45,9 @@ The JSON file used by SettingsManagerUI should have the following structure:
     "block_key1": {  // block 1
         "section1": {  // tab 1
             "parameter2": {
-                "type": "string|int|float|dropdown", // currently four types are supported
+                "type": "string|int|float|dropdown|color", // currently five types are supported
                 "value": "default_value",
-                "default": "default_value",
+                "default": "default_value", // if "auto" key is present, "default"=true|false is used as the default value  
                 "auto": true|false,  // optional to enable a checkbox to enable automatic value
                 "options": ["option1", "option2"]  // for dropdown type only
             },
