@@ -4,25 +4,28 @@
         "Setting block 1": {
             "dropdown test": {
                 type: "dropdown",
-                value: "Option 1",
+                value: "test3",
                 options: [
                     "Option 1",
                     "Option 2",
                     "test3",
                 ],
                 auto: true,
-                "default": true
+                "default": true,
+                advanced: true,
             },
             "test string": {
                 type: "string",
                 value: "test",
                 "default": "test",
+                advanced: true,
             },
             "test string2": {
                 type: "string",
                 value: "",
                 auto: false,
-                "default": false
+                "default": false,
+                "advanced": false
             },
             "test float": {
                 type: "float",

@@ -49,6 +49,7 @@ The JSON file used by SettingsManagerUI should have the following structure:
                 "default": "default_value", // if "auto" key is present, "default"=true|false is used as the default value  
                 "auto": true|false,  // optional to enable a checkbox to enable automatic value
                 "options": ["option1", "option2"]  // for dropdown type only
+                "advanced": true|false,  // optional to hide the parameter in the basic view
             },
             "parameter2": {
                 ...
