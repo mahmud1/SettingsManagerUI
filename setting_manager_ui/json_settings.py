@@ -83,7 +83,7 @@ class JsonSettings:
         default = data.get("default", None)
         auto_flag = data.get("auto", False)
         if auto_flag:
-            return default
+            return None
         return data.get("value", default)
 
     def getDefault(self, key: list):
