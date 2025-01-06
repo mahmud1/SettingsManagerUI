@@ -203,10 +203,15 @@ class SettingsTableDialog(QDialog):
         """ Reads the entire JSON file and extracts only the block we care about. """
         settings_block = self.settings.load(self.block_key)
 
+        current_tab_index = self.tab_widget.currentIndex()
+
         self.tab_widget.clear()
         for section_name, params_dict in settings_block.items():
             table = SettingsTabWidget(section_name, params_dict, parent=self.tab_widget, hide_advanced=hide_advanced)
             self.tab_widget.addTab(table, section_name)
+
+        if current_tab_index != -1 and current_tab_index < self.tab_widget.count():
+            self.tab_widget.setCurrentIndex(current_tab_index)
 
     def onAdvancedCheckboxToggled(self):
         """ Handles the advanced checkbox toggled event. """
