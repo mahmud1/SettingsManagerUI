@@ -98,4 +98,3 @@ class JsonSettings:
             if data is None:
                 return None
         return data.get("default", None)
-

@@ -3,7 +3,6 @@ try:
         QWidget,
         QPushButton,
         QHBoxLayout,
-        QMessageBox,
         QColorDialog,
         QCheckBox,
         QSpinBox,
@@ -17,7 +16,6 @@ except ImportError:
         QWidget,
         QPushButton,
         QHBoxLayout,
-        QMessageBox,
         QColorDialog,
         QCheckBox,
         QSpinBox,
@@ -371,5 +369,3 @@ class ColorPickerWithCheckbox(ObjectWithCheckbox):
         :rtype: str
         """
         return self.wobject.getColor()
-
-
