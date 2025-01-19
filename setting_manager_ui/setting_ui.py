@@ -109,10 +109,9 @@ class SettingsTabWidget(QTableWidget):
             else:
                 param_item.setBackground(column_color2)
 
-
             # Column 1: Value (editable)
             if param_type == "color":
-                wobject = ColorPickerWithCheckbox(param_value, auto_flag, add_checkbox)
+                wobject = ColorPickerWithCheckbox(param_value, auto_flag, add_checkbox, options=options)
             elif param_type == "bool":
                 wobject = QCheckBox()
                 wobject.setChecked(param_value)
@@ -151,7 +150,6 @@ class SettingsTabWidget(QTableWidget):
                 default_item.setBackground(column_color)
             else:
                 default_item.setBackground(column_color2)
-
 
             if self.hide_advanced and advanced:
                 self.hideRow(row_idx)

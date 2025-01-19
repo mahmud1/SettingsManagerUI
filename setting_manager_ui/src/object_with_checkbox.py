@@ -11,6 +11,7 @@ try:
         QLineEdit,
         QComboBox
     )
+    from PySide6.QtGui import QColor
 except ImportError:
     from qgis.PyQt.QtWidgets import (
         QWidget,
@@ -24,6 +25,7 @@ except ImportError:
         QLineEdit,
         QComboBox
     )
+    from qgis.PyQt.QtGui import QColor
 
 
 class ColorPicker(QWidget):
@@ -35,7 +37,7 @@ class ColorPicker(QWidget):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, initial_color, parent=None):
+    def __init__(self, initial_color, use_native_flag=False, parent=None):
         super().__init__(parent)
         self.color = initial_color
         self.layout = QHBoxLayout(self)
@@ -45,9 +47,49 @@ class ColorPicker(QWidget):
         self.layout.addWidget(self.button)
         self.setLayout(self.layout)
 
+        self.use_native_flag = use_native_flag
+        self.color_dialog = QColorDialog()
+        self.custom_colors = [
+            "#1f77b4",  # Blue
+            "#ff7f0e",  # Orange
+            "#2ca02c",  # Green
+            "#d62728",  # Red
+            "#9467bd",  # Purple
+            "#8c564b",  # Brown
+            "#e377c2",  # Pink
+            "#7f7f7f",  # Gray
+            "#bcbd22",  # Yellow-green
+            "#17becf"  # Cyan
+        ]
+
+    def setCustomColors(self, custom_colors):
+        """
+        Sets the custom colors for the color dialog.
+
+        :param custom_colors: The list of custom colors.
+        :type custom_colors: list of str
+        """
+        #  Hint: Mac Native Dialog does not setCustomColor
+        if len(custom_colors) > 0:
+            # clear the custom colors if there is a new list
+            for i in range(16):  # QColorDialog supports up to 16 custom colors
+                self.color_dialog.setCustomColor(i, QColor(255, 255, 255))
+            self.custom_colors = custom_colors
+
+        for i, custom_color in enumerate(self.custom_colors):
+            self.color_dialog.setCustomColor(i, QColor(custom_color))
+
     def openColorDialog(self):
         """ Opens a color dialog to select a new color. """
-        color = QColorDialog.getColor()
+
+        initial_color = QColor(self.color)
+        color_dialog = self.color_dialog
+
+        if self.use_native_flag:
+            color = color_dialog.getColor(initial_color)
+        else:
+            color = color_dialog.getColor(initial_color, options=QColorDialog.DontUseNativeDialog)
+
         if color.isValid():
             self.color = color.name()
             self.button.setStyleSheet(f"background-color: {self.color}")
@@ -345,8 +387,15 @@ class ColorPickerWithCheckbox(ObjectWithCheckbox):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, parent=None):
+    def __init__(self, value, flag, checkbox=False, options=[], parent=None):
         super().__init__(value, flag, checkbox, parent)
+        self.options = options
+        self.setCustomColors()
+
+    def setCustomColors(self, options=[]):
+        if len(options) == 0:
+            options = self.options
+        self.wobject.setCustomColors(options)
 
     def addObject(self):
         """ Adds a ColorPicker as the main widget. """
