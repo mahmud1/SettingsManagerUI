@@ -286,8 +286,11 @@ class ComboBoxWithCheckbox(ObjectWithCheckbox):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, parent=None):
+    def __init__(self, value, flag, checkbox=False, options=[], parent=None):
         super().__init__(value, flag, checkbox, parent)
+        if len(options) > 0:
+            self.addItems(options)
+            self.setCurrentText(value)
 
     def addItems(self, items):
         """
