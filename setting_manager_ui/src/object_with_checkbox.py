@@ -62,7 +62,7 @@ class ColorPicker(QWidget):
             "#17becf"  # Cyan
         ]
 
-    def setCustomColors(self, custom_colors):
+    def setCustomColors(self, custom_colors=[]):
         """
         Sets the custom colors for the color dialog.
 
@@ -71,10 +71,12 @@ class ColorPicker(QWidget):
         """
         #  Hint: Mac Native Dialog does not setCustomColor
         if len(custom_colors) > 0:
-            # clear the custom colors if there is a new list
-            for i in range(16):  # QColorDialog supports up to 16 custom colors
-                self.color_dialog.setCustomColor(i, QColor(255, 255, 255))
             self.custom_colors = custom_colors
+
+        # clear the firt 10 custom colors if there is a new list
+        # leave the last 6 custom colors unchanged, for more flexibility
+        for i in range(10):  # QColorDialog supports up to 16 custom colors
+            self.color_dialog.setCustomColor(i, QColor(255, 255, 255))
 
         for i, custom_color in enumerate(self.custom_colors):
             self.color_dialog.setCustomColor(i, QColor(custom_color))
@@ -84,6 +86,8 @@ class ColorPicker(QWidget):
 
         initial_color = QColor(self.color)
         color_dialog = self.color_dialog
+
+        self.setCustomColors()
 
         if self.use_native_flag:
             color = color_dialog.getColor(initial_color)
