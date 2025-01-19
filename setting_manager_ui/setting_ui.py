@@ -76,6 +76,9 @@ class SettingsTabWidget(QTableWidget):
     def loadData(self):
         """ Loads the parameters into the table widget. """
 
+        column_color = QBrush(QColor(240, 248, 255))
+        column_color2 = QBrush(QColor(250, 250, 250))
+
         # TODO: implement a way to hide/show certain parameters
         param_dict_visible = self.params_dict
 
@@ -101,7 +104,11 @@ class SettingsTabWidget(QTableWidget):
             param_item = QTableWidgetItem(param_name)
             param_item.setFlags(param_item.flags() & ~Qt.ItemIsEditable)
             self.setItem(row_idx, 0, param_item)
-            param_item.setBackground(QBrush(QColor(240, 240, 240)))  # Light gray background
+            if advanced:
+                param_item.setBackground(column_color)
+            else:
+                param_item.setBackground(column_color2)
+
 
             # Column 1: Value (editable)
             if param_type == "color":
@@ -140,7 +147,11 @@ class SettingsTabWidget(QTableWidget):
             default_item = QTableWidgetItem(str(param_default_to_show))
             default_item.setFlags(default_item.flags() & ~Qt.ItemIsEditable)
             self.setItem(row_idx, 2, default_item)
-            default_item.setBackground(QBrush(QColor(250, 255, 250)))
+            if advanced:
+                default_item.setBackground(column_color)
+            else:
+                default_item.setBackground(column_color2)
+
 
             if self.hide_advanced and advanced:
                 self.hideRow(row_idx)
