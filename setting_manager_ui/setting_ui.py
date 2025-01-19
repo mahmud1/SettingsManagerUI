@@ -8,9 +8,13 @@ try:
         QApplication,
         QDialog,
         QVBoxLayout,
+        QHBoxLayout,
         QTableWidget,
         QTableWidgetItem,
         QTabWidget,
+        QCheckBox,
+        QMessageBox,
+        QPushButton
     )
     from PySide6.QtCore import Qt, Signal
     from PySide6.QtGui import QColor, QBrush
@@ -20,15 +24,25 @@ except ImportError:
         QApplication,
         QDialog,
         QVBoxLayout,
+        QHBoxLayout,
         QTableWidget,
         QTableWidgetItem,
         QTabWidget,
+        QCheckBox,
+        QMessageBox,
+        QPushButton
     )
     from qgis.PyQt.QtCore import Qt, pyqtSignal as Signal
     from qgis.PyQt.QtGui import QColor, QBrush
 
 from json_settings import JsonSettings
-from src.object_with_checkbox import *
+from src.object_with_checkbox import (
+    ObjectWithCheckbox,
+    ColorPickerWithCheckbox,
+    DoubleSpinBoxWithCheckbox,
+    SpinBoxWithCheckbox,
+    LineEditWithCheckbox,
+    ComboBoxWithCheckbox)
 
 
 class SettingsTabWidget(QTableWidget):
@@ -331,4 +345,3 @@ if __name__ == "__main__":
     dialog = SettingsTableDialog(JSON_FILE, "test setting")
     dialog.exec()
     sys.exit(app.exec())
-
