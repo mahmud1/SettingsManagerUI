@@ -108,9 +108,7 @@ class SettingsTabWidget(QTableWidget):
                 wobject.setValue(param_value)
 
             elif param_type == "dropdown":
-                wobject = ComboBoxWithCheckbox(param_value, auto_flag, add_checkbox)
-                wobject.addItems(options)
-                wobject.setCurrentText(param_value)
+                wobject = ComboBoxWithCheckbox(param_value, auto_flag, add_checkbox, options)
             else:
                 QMessageBox.warning(self, "Unknown parameter type", f"Unknown parameter type: {param_type}")
                 raise ValueError(f"Unknown parameter type: {param_type}")
