@@ -3,75 +3,81 @@
     "test setting": {
         "Setting block 1": {
             "dropdown test": {
-                type: "dropdown",
-                value: "test3",
-                options: [
+                "type": "dropdown",
+                "value": "test3",
+                "options": [
                     "Option 1",
                     "Option 2",
-                    "test3",
+                    "test3"
                 ],
-                auto: true,
+                "auto": false,
                 "default": true,
-                advanced: true,
+                "advanced": true
             },
             "test string": {
-                type: "string",
-                value: "test",
+                "type": "string",
+                "value": "test",
                 "default": "test",
-                advanced: true,
+                "advanced": true
             },
             "test string2": {
-                type: "string",
-                value: "",
-                auto: false,
+                "type": "string",
+                "value": "",
+                "auto": false,
                 "default": false,
                 "advanced": false
             },
             "test float": {
-                type: "float",
-                value: 0.2,
-                "default": 0.2,
+                "type": "float",
+                "value": 0.2,
+                "default": 0.2
             },
             "test float2": {
-                type: "float",
-                value: 1.0,
-                auto: true,
+                "type": "float",
+                "value": 1.0,
+                "auto": true
             },
-            test_bool: {
-                type: "bool",
-                value: false,
-                "default": false,
+            "test_bool": {
+                "type": "bool",
+                "value": false,
+                "default": false
             },
-            test_int: {
-                type: "int",
-                value: 4,
-                "default": 4,
+            "test_int": {
+                "type": "int",
+                "value": 4,
+                "default": 4
             },
-            test_color: {
-                type: "color",
-                value: "#68ff7f",
-                "default": "#68ff7f",
-            },
+            "test_color": {
+                "type": "color",
+                "value": "#68ff7f",
+                "default": "#68ff7f"
+            }
         },
         "Setting block 2": {
-            title: {
-                type: "string",
-                value: "bar",
-                "default": "bar",
+            "title": {
+                "type": "string",
+                "value": "bar",
+                "default": "bar"
             },
             "test float": {
-                type: "float",
-                value: 0.2,
-                default: 0.2,
-                range: [-99.1, 1]
+                "type": "float",
+                "value": 0.2,
+                "default": 0.2,
+                "range": [
+                    -99.1,
+                    1
+                ]
             },
             "test int": {
-                type: "int",
-                value: 2,
-                default: 2,
-                range: [-99, 10]
+                "type": "int",
+                "value": 2,
+                "default": 2,
+                "range": [
+                    -99,
+                    10
+                ]
             }
         }
     },
-    "other setting": {},
+    "other setting": {}
 }

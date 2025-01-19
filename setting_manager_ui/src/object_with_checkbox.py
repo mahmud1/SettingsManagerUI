@@ -92,7 +92,7 @@ class ObjectWithCheckbox(QWidget):
         self.layout = QHBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)  # Set layout margins to zero
         self.wobject = None
-        self.addObject(flag)
+        self.addObject()
         if checkbox:
             self.checkbox = QCheckBox()
             self.checkbox.setChecked(not flag)
@@ -107,10 +107,14 @@ class ObjectWithCheckbox(QWidget):
         self.setLayout(self.layout)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Adjust size policy
         self.wobject.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setEnabled(flag)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds the main widget. This method should be overridden by subclasses. """
         pass
+
+    def setEnabled(self, flag):
+        self.wobject.setEnabled(not flag)
 
     def toggleObject(self, state):
         """
@@ -152,11 +156,10 @@ class LineEditWithCheckbox(ObjectWithCheckbox):
     def __init__(self, value, flag, checkbox=False, parent=None):
         super().__init__(value, flag, checkbox, parent)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds a QLineEdit as the main widget. """
         self.wobject = QLineEdit()
         self.wobject.setText(self.value)
-        self.wobject.setEnabled(not flag)
 
     def setValue(self, value):
         """
@@ -196,10 +199,9 @@ class SpinBoxWithCheckbox(ObjectWithCheckbox):
         self.range = range
         super().__init__(value, flag, checkbox, parent)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds a QSpinBox as the main widget. """
         self.wobject = QSpinBox()
-        self.wobject.setEnabled(not flag)
         if self.range[0] is not None:
             self.wobject.setMinimum(self.range[0])
         if self.range[1] is not None:
@@ -243,10 +245,9 @@ class DoubleSpinBoxWithCheckbox(ObjectWithCheckbox):
         self.range = range
         super().__init__(value, flag, checkbox, parent)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds a QDoubleSpinBox as the main widget. """
         self.wobject = QDoubleSpinBox()
-        self.wobject.setEnabled(not flag)
         if self.range[0] is not None:
             self.wobject.setMinimum(float(self.range[0]))
         if self.range[1] is not None:
@@ -284,8 +285,11 @@ class ComboBoxWithCheckbox(ObjectWithCheckbox):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, parent=None):
+    def __init__(self, value, flag, checkbox=False, options=[], parent=None):
         super().__init__(value, flag, checkbox, parent)
+        if len(options) > 0:
+            self.addItems(options)
+            self.setCurrentText(value)
 
     def addItems(self, items):
         """
@@ -305,10 +309,9 @@ class ComboBoxWithCheckbox(ObjectWithCheckbox):
         """
         self.wobject.setCurrentText(text)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds a QComboBox as the main widget. """
         self.wobject = QComboBox()
-        self.wobject.setEnabled(not flag)
 
     def setValue(self, value):
         """
@@ -345,10 +348,9 @@ class ColorPickerWithCheckbox(ObjectWithCheckbox):
     def __init__(self, value, flag, checkbox=False, parent=None):
         super().__init__(value, flag, checkbox, parent)
 
-    def addObject(self, flag):
+    def addObject(self):
         """ Adds a ColorPicker as the main widget. """
         self.wobject = ColorPicker(self.value)
-        self.wobject.setEnabled(not flag)
 
     def setValue(self, value):
         """
