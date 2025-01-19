@@ -10,7 +10,7 @@
                     "Option 2",
                     "test3"
                 ],
-                "auto": false,
+                "auto": true,
                 "default": true,
                 "advanced": true
             },
@@ -34,8 +34,8 @@
             },
             "test float2": {
                 "type": "float",
-                "value": 1.0,
-                "auto": true
+                "value": 0.0,
+                "auto": false
             },
             "test_bool": {
                 "type": "bool",
