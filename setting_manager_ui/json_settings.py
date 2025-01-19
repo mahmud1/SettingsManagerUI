@@ -1,9 +1,6 @@
 __version__ = '0.4.1'
 
-try:
-    import json5 as json
-except ImportError:
-    import json
+import json
 
 
 class JsonSettings:
