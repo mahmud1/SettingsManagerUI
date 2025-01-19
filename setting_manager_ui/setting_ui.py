@@ -90,7 +90,7 @@ class SettingsTabWidget(QTableWidget):
             param_default = info.get("default", "")
             auto_flag = info.get("auto", False)
             # options for dropdown list
-            options = info.get("options", None)
+            options = info.get("options", [])
             advanced = info.get("advanced", False)
             # range for int and float
             range = info.get("range", [None, None])
