@@ -51,6 +51,16 @@
                 "type": "color",
                 "value": "#68ff7f",
                 "default": "#68ff7f"
+            },
+            "color options": {
+                "type": "color",
+                "value": "#ff7f0e",
+                "default": "#68ff7f",
+                "options": [
+                    "#1f77b4",
+                    "#ff7f0e",
+                    "#2ca02c"
+                ]
             }
         },
         "Setting block 2": {
