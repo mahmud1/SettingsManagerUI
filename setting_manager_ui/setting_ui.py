@@ -273,7 +273,7 @@ class SettingsTableDialog(QDialog):
 
         except ValueError as e:
             QMessageBox.warning(self, "Invalid Input", str(e))
-            return
+            return None
 
         return settings_block
 
