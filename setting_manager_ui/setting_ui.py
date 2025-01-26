@@ -256,26 +256,36 @@ class SettingsTableDialog(QDialog):
 
                 # Update the specific part of the JSON file
                 if section_name in settings_block:
-                    for row_index in range(table_widget.rowCount()):
-                        param_name_item = table_widget.item(row_index, 0)
-                        if param_name_item:
-                            param_name = param_name_item.text()
-                            if param_name in settings_block[section_name]:
-                                widget = table_widget.cellWidget(row_index, 1)
-                                if widget:
-                                    if isinstance(widget, QCheckBox):
-                                        settings_block[section_name][param_name]['value'] = widget.isChecked()
-                                    else:
-                                        settings_block[section_name][param_name]['value'] = widget.getValue()
-
-                                    if 'auto' in settings_block[section_name][param_name]:
-                                        settings_block[section_name][param_name]['auto'] = widget.isAuto()
-
+                    self.updateSection(settings_block=settings_block, section_name=section_name,
+                                       table_widget=table_widget)
         except ValueError as e:
             QMessageBox.warning(self, "Invalid Input", str(e))
             return None
 
         return settings_block
+
+    def updateSection(self, *, settings_block, section_name, table_widget):
+        """
+        Updates the settings block with the data from the given table widget.
+        :param settings_block:
+        :param section_name:
+        :param table_widget:
+        :return:
+        """
+        for row_index in range(table_widget.rowCount()):
+            param_name_item = table_widget.item(row_index, 0)
+            if param_name_item:
+                param_name = param_name_item.text()
+                if param_name in settings_block[section_name]:
+                    widget = table_widget.cellWidget(row_index, 1)
+                    if widget:
+                        if isinstance(widget, QCheckBox):
+                            settings_block[section_name][param_name]['value'] = widget.isChecked()
+                        else:
+                            settings_block[section_name][param_name]['value'] = widget.getValue()
+
+                        if 'auto' in settings_block[section_name][param_name]:
+                            settings_block[section_name][param_name]['auto'] = widget.isAuto()
 
     def resetToDefault(self, reset_all=False):
         """
