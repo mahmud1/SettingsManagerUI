@@ -178,8 +178,8 @@ class ObjectWithCheckbox(QWidget):
 
         if self.checkbox:
             return not self.checkbox.isChecked()
-        else:
-            return False
+
+        return False
 
 
 class LineEditWithCheckbox(ObjectWithCheckbox):
@@ -195,8 +195,6 @@ class LineEditWithCheckbox(ObjectWithCheckbox):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, parent=None):
-        super().__init__(value, flag, checkbox, parent)
 
     def addObject(self):
         """ Adds a QLineEdit as the main widget. """
