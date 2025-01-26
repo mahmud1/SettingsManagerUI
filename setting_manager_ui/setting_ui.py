@@ -188,37 +188,37 @@ class SettingsTableDialog(QDialog):
         main_layout.addLayout(button_layout)
 
         # Advanced checkbox
-        self.advanced_checkbox = QCheckBox("Hide advanced parameters")
-        self.advanced_checkbox.setChecked(True)
-        self.advanced_checkbox.clicked.connect(self.onAdvancedCheckboxToggled)
-        advanced_layout.addWidget(self.advanced_checkbox)
+        advanced_checkbox = QCheckBox("Show advanced parameters")
+        advanced_checkbox.setChecked(False)
+        advanced_checkbox.clicked.connect(self.onAdvancedCheckboxToggled)
+        advanced_layout.addWidget(advanced_checkbox)
 
         # OK button
-        self.save_button = QPushButton("Ok")
-        self.save_button.clicked.connect(self.onOkClicked)
-        button_layout.addWidget(self.save_button)
+        save_button = QPushButton("Ok")
+        save_button.clicked.connect(self.onOkClicked)
+        button_layout.addWidget(save_button)
 
         # Apply button
-        self.apply_button = QPushButton("Apply")
-        self.apply_button.clicked.connect(self.onApplyClicked)
-        button_layout.addWidget(self.apply_button)
+        apply_button = QPushButton("Apply")
+        apply_button.clicked.connect(self.onApplyClicked)
+        button_layout.addWidget(apply_button)
 
         # Reset button
-        self.reset_button = QPushButton("Reset")
-        self.reset_button.clicked.connect(lambda: self.resetToDefault(reset_all=False))
-        button_layout.addWidget(self.reset_button)
+        reset_button = QPushButton("Reset")
+        reset_button.clicked.connect(lambda: self.resetToDefault(reset_all=False))
+        button_layout.addWidget(reset_button)
 
         # Reset All button
-        self.reset_all_button = QPushButton("Reset All")
-        self.reset_all_button.clicked.connect(lambda: self.resetToDefault(reset_all=True))
-        button_layout.addWidget(self.reset_all_button)
+        reset_all_button = QPushButton("Reset All")
+        reset_all_button.clicked.connect(lambda: self.resetToDefault(reset_all=True))
+        button_layout.addWidget(reset_all_button)
 
         # Cancel button
-        self.close_button = QPushButton("Cancel")
-        self.close_button.clicked.connect(self.reject)
-        button_layout.addWidget(self.close_button)
+        close_button = QPushButton("Cancel")
+        close_button.clicked.connect(self.reject)
+        button_layout.addWidget(close_button)
 
-        self.loadData(self.advanced_checkbox.isChecked())
+        self.loadData(not advanced_checkbox.isChecked())
 
     def loadData(self, hide_advanced=False):
         """ Reads the entire JSON file and extracts only the block we care about. """
@@ -234,9 +234,9 @@ class SettingsTableDialog(QDialog):
         if current_tab_index != -1 and current_tab_index < self.tab_widget.count():
             self.tab_widget.setCurrentIndex(current_tab_index)
 
-    def onAdvancedCheckboxToggled(self):
+    def onAdvancedCheckboxToggled(self, status=False):
         """ Handles the advanced checkbox toggled event. """
-        self.loadData(hide_advanced=self.advanced_checkbox.isChecked())
+        self.loadData(hide_advanced=not status)
 
     def collectData(self):
         """
