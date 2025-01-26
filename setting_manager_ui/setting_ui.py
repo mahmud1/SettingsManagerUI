@@ -319,7 +319,7 @@ class SettingsTableDialog(QDialog):
         if param_name_item:
             param_name = param_name_item.text()
             if param_name in table_widget.param_types_defaults:
-                param_type, param_default, auto_flag = table_widget.param_types_defaults[param_name]
+                _, param_default, _ = table_widget.param_types_defaults[param_name]
                 widget = table_widget.cellWidget(row, 1)
                 if widget:
                     if isinstance(widget, QCheckBox):
