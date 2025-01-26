@@ -100,7 +100,7 @@ class SettingsTabWidget(QTableWidget):
             options = info.get("options", [])
             advanced = info.get("advanced", False)
             # range for int and float
-            value_range = info.get("value_range", None)
+            value_range = info.get("range", None)
             # add auto checkbox if auto flag is present
             add_checkbox = "auto" in info
 
