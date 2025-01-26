@@ -75,84 +75,107 @@ class SettingsTabWidget(QTableWidget):
 
     def loadData(self):
         """ Loads the parameters into the table widget. """
+        self.setupTable()
+        self.populateTable()
 
+    def setupTable(self):
+        """ Sets up the table widget. """
+        self.setRowCount(len(self.params_dict))
+        self.setColumnCount(3)
+        self.setHorizontalHeaderLabels(["Parameter", "Value", "Default"])
+        self.verticalHeader().setVisible(False)
+        self.param_types_defaults = {}
+
+    def populateTable(self):
+        """ Populates the table widget with parameters. """
         column_color = QBrush(QColor(240, 248, 255))
         column_color2 = QBrush(QColor(250, 250, 250))
 
-        # TODO: implement a way to hide/show certain parameters
-        param_dict_visible = self.params_dict
-
-        self.setRowCount(len(param_dict_visible))
-
-        for row_idx, (param_name, info) in enumerate(param_dict_visible.items()):
+        for row_idx, (param_name, info) in enumerate(self.params_dict.items()):
             param_type = info.get("type", "string")
             param_value = info.get("value", "")
             param_default = info.get("default", "")
             auto_flag = info.get("auto", False)
-            # options for dropdown list
+            # options for dropdown list and color list
             options = info.get("options", [])
             advanced = info.get("advanced", False)
             # range for int and float
-            range = info.get("range", [None, None])
+            value_range = info.get("value_range", None)
             # add auto checkbox if auto flag is present
             add_checkbox = "auto" in info
 
-            # store type and default in a dictionary for later use
             self.param_types_defaults[param_name] = (param_type, param_default, auto_flag)
 
-            # Column 0: Parameter name (read-only)
-            param_item = QTableWidgetItem(param_name)
-            param_item.setFlags(param_item.flags() & ~Qt.ItemIsEditable)
-            self.setItem(row_idx, 0, param_item)
-            if advanced:
-                param_item.setBackground(column_color)
-            else:
-                param_item.setBackground(column_color2)
-
-            # Column 1: Value (editable)
-            if param_type == "color":
-                wobject = ColorPickerWithCheckbox(param_value, auto_flag, add_checkbox, options=options)
-            elif param_type == "bool":
-                wobject = QCheckBox()
-                wobject.setChecked(param_value)
-            elif param_type == "float":
-                wobject = DoubleSpinBoxWithCheckbox(param_value, auto_flag, add_checkbox, range)
-                wobject.setValue(param_value)
-
-            elif param_type == "int":
-                wobject = SpinBoxWithCheckbox(param_value, auto_flag, add_checkbox, range)
-                wobject.setValue(param_value)
-
-            elif param_type == "string":
-                wobject = LineEditWithCheckbox(param_value, auto_flag, add_checkbox)
-                wobject.setValue(param_value)
-
-            elif param_type == "dropdown":
-                wobject = ComboBoxWithCheckbox(param_value, auto_flag, add_checkbox, options)
-            else:
-                QMessageBox.warning(self, "Unknown parameter type", f"Unknown parameter type: {param_type}")
-                raise ValueError(f"Unknown parameter type: {param_type}")
-
-            self.setCellWidget(row_idx, 1, wobject)
-
-            # Column 2: Default value (read-only)
-            param_default_to_show = param_default
-            if isinstance(wobject, ObjectWithCheckbox) and wobject.checkbox:
-                if param_default:
-                    param_default_to_show = 'auto'
-                else:
-                    param_default_to_show = 'manual'
-
-            default_item = QTableWidgetItem(str(param_default_to_show))
-            default_item.setFlags(default_item.flags() & ~Qt.ItemIsEditable)
-            self.setItem(row_idx, 2, default_item)
-            if advanced:
-                default_item.setBackground(column_color)
-            else:
-                default_item.setBackground(column_color2)
+            self.addParameterName(row_idx=row_idx, param_name=param_name, advanced=advanced, column_color=column_color,
+                                  column_color2=column_color2)
+            wobject = self.addParameterValue(row_idx=row_idx,
+                                             param={
+                                                 "type": param_type,
+                                                 "value": param_value,
+                                                 "auto": auto_flag, "options": options,
+                                                 "value_range": value_range,
+                                                 "add_checkbox": add_checkbox})
+            self.addParameterDefault(wobject=wobject, row_idx=row_idx, param_default=param_default, advanced=advanced,
+                                     column_color=column_color, column_color2=column_color2)
 
             if self.hide_advanced and advanced:
                 self.hideRow(row_idx)
+
+    def addParameterName(self, *, row_idx, param_name, advanced, column_color, column_color2):
+        """ Adds the parameter name to the table. """
+        param_item = QTableWidgetItem(param_name)
+        param_item.setFlags(param_item.flags() & ~Qt.ItemIsEditable)
+        self.setItem(row_idx, 0, param_item)
+        param_item.setBackground(column_color if advanced else column_color2)
+
+    def addParameterValue(self, *, row_idx, param):
+        """ Adds the parameter value to the table. """
+        param_type = param.get("type", "string")
+        param_value = param.get("value", "")
+        auto_flag = param.get("auto", False)
+        add_checkbox = param.get("add_checkbox", False)
+        options = param.get("options", [])
+        value_range = param.get("value_range", None)
+
+        if param_type == "color":
+            wobject = ColorPickerWithCheckbox(value=param_value, flag=auto_flag, checkbox=add_checkbox, options=options)
+        elif param_type == "bool":
+            wobject = QCheckBox()
+            wobject.setChecked(param_value)
+        elif param_type == "float":
+            wobject = DoubleSpinBoxWithCheckbox(value=param_value, flag=auto_flag, checkbox=add_checkbox,
+                                                value_range=value_range)
+            wobject.setValue(param_value)
+        elif param_type == "int":
+            wobject = SpinBoxWithCheckbox(value=param_value, flag=auto_flag, checkbox=add_checkbox,
+                                          value_range=value_range)
+            wobject.setValue(param_value)
+        elif param_type == "string":
+            wobject = LineEditWithCheckbox(param_value, auto_flag, add_checkbox)
+            wobject.setValue(param_value)
+        elif param_type == "dropdown":
+            wobject = ComboBoxWithCheckbox(value=param_value, flag=auto_flag, checkbox=add_checkbox, options=options)
+        else:
+            QMessageBox.warning(self, "Unknown parameter type", f"Unknown parameter type: {param_type}")
+            raise ValueError(f"Unknown parameter type: {param_type}")
+
+        self.setCellWidget(row_idx, 1, wobject)
+
+        return wobject
+
+    def addParameterDefault(self, *, wobject, row_idx, param_default, advanced, column_color, column_color2,):
+        """ Adds the parameter default value to the table. """
+        param_default_to_show = param_default
+        if isinstance(wobject, ObjectWithCheckbox) and wobject.checkbox:
+            if param_default:
+                param_default_to_show = 'auto'
+            else:
+                param_default_to_show = 'manual'
+
+        default_item = QTableWidgetItem(str(param_default_to_show))
+        default_item.setFlags(default_item.flags() & ~Qt.ItemIsEditable)
+        self.setItem(row_idx, 2, default_item)
+        default_item.setBackground(column_color if advanced else column_color2)
 
 
 class SettingsTableDialog(QDialog):
