@@ -97,7 +97,7 @@ class SettingsTabWidget(QTableWidget):
             param_default = info.get("default", "")
             auto_flag = info.get("auto", False)
             # options for dropdown list and color list
-            options = info.get("options", [])
+            options = info.get("options", None)
             advanced = info.get("advanced", False)
             # range for int and float
             value_range = info.get("range", None)
@@ -134,7 +134,7 @@ class SettingsTabWidget(QTableWidget):
         param_value = param.get("value", "")
         auto_flag = param.get("auto", False)
         add_checkbox = param.get("add_checkbox", False)
-        options = param.get("options", [])
+        options = param.get("options", None)
         value_range = param.get("value_range", None)
 
         if param_type == "color":

@@ -393,12 +393,9 @@ class ColorPickerWithCheckbox(ObjectWithCheckbox):
     """
     def __init__(self, *, value, flag, checkbox=False, options=None, parent=None):
         super().__init__(value, flag, checkbox, parent)
-        self.options = options
-        self.setCustomColors()
+        self.setCustomColors(options)
 
-    def setCustomColors(self, options=None):
-        if options is not None:
-            options = self.options
+    def setCustomColors(self, options):
         self.wobject.setCustomColors(options)
 
     def addObject(self):
