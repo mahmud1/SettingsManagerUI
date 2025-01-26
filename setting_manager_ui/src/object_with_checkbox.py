@@ -155,10 +155,6 @@ class ObjectWithCheckbox(QWidget):
         self.wobject.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setEnabled(flag)
 
-    def addObject(self):
-        """ Adds the main widget. This method should be overridden by subclasses. """
-        pass
-
     def setEnabled(self, flag):
         self.wobject.setEnabled(not flag)
 
