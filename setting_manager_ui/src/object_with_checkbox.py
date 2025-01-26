@@ -62,15 +62,15 @@ class ColorPicker(QWidget):
             "#17becf"  # Cyan
         ]
 
-    def setCustomColors(self, custom_colors=[]):
+    def setCustomColors(self, custom_colors=None):
         """
         Sets the custom colors for the color dialog.
 
-        :param custom_colors: The list of custom colors.
-        :type custom_colors: list of str
+        :param custom_colors: The list of custom colors
+        :type custom_colors: list of str or None
         """
         #  Hint: Mac Native Dialog does not setCustomColor
-        if len(custom_colors) > 0:
+        if custom_colors is not None:
             self.custom_colors = custom_colors
 
         # clear the firt 10 custom colors if there is a new list
@@ -230,13 +230,14 @@ class SpinBoxWithCheckbox(ObjectWithCheckbox):
     :type flag: bool
     :param checkbox: Whether to include a checkbox.
     :type checkbox: bool, optional
-    :param range: The range of the QSpinBox, defaults to [None, None].
-    :type range: list of int, optional
+    :param value_range: The value_range of the QSpinBox, defaults to None
+    :type value_range: list of int or None, optional
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, range=[None, None], parent=None):
-        self.range = range
+    def __init__(self, *, value, flag, checkbox=False, value_range=None, parent=None):
+        value_range = value_range if value_range is not None else [None, None]
+        self.range = value_range
         super().__init__(value, flag, checkbox, parent)
 
     def addObject(self):
@@ -276,13 +277,14 @@ class DoubleSpinBoxWithCheckbox(ObjectWithCheckbox):
     :type flag: bool
     :param checkbox: Whether to include a checkbox.
     :type checkbox: bool, optional
-    :param range: The range of the QDoubleSpinBox, defaults to [None, None].
-    :type range: list of float, optional
+    :param value_range: The value_range of the QDoubleSpinBox, defaults to None
+    :type value_range: list of float or None, optional
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, range=[None, None], parent=None):
-        self.range = range
+    def __init__(self, *, value, flag, checkbox=False, value_range=None, parent=None):
+        value_range = value_range if value_range is not None else [None, None]
+        self.range = value_range
         super().__init__(value, flag, checkbox, parent)
 
     def addObject(self):
@@ -322,11 +324,15 @@ class ComboBoxWithCheckbox(ObjectWithCheckbox):
     :type flag: bool
     :param checkbox: Whether to include a checkbox.
     :type checkbox: bool, optional
+    :param options: The list of options to be added to the QComboBox.
+    :type options: list of str or None, optional
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, options=[], parent=None):
+    def __init__(self, *, value, flag, checkbox=False, options=None, parent=None):
         super().__init__(value, flag, checkbox, parent)
+        if options is None:
+            options = []
         if len(options) > 0:
             self.addItems(options)
             self.setCurrentText(value)
@@ -385,13 +391,13 @@ class ColorPickerWithCheckbox(ObjectWithCheckbox):
     :param parent: The parent widget.
     :type parent: QWidget, optional
     """
-    def __init__(self, value, flag, checkbox=False, options=[], parent=None):
+    def __init__(self, *, value, flag, checkbox=False, options=None, parent=None):
         super().__init__(value, flag, checkbox, parent)
         self.options = options
         self.setCustomColors()
 
-    def setCustomColors(self, options=[]):
-        if len(options) == 0:
+    def setCustomColors(self, options=None):
+        if options is not None:
             options = self.options
         self.wobject.setCustomColors(options)
 
