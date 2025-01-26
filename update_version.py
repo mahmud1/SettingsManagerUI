@@ -4,10 +4,10 @@ import os
 
 
 def updateVersionInFile(file_path, version):
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         for line in lines:
             if line.startswith('__version__'):
                 file.write(f"__version__ = '{version}'\n")
@@ -17,7 +17,7 @@ def updateVersionInFile(file_path, version):
 
 def main():
     version_file_path = os.path.join(os.path.dirname(__file__), 'VERSION')
-    with open(version_file_path, 'r') as version_file:
+    with open(version_file_path, 'r', encoding='utf-8') as version_file:
         version = version_file.read().strip()
 
     # List of files to update with version information

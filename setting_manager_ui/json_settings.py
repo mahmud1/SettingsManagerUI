@@ -30,7 +30,7 @@ class JsonSettings:
         """
 
         # TODO: allow a list to get a nested block
-        with open(self.filename, 'r') as f:
+        with open(self.filename, 'r', encoding='utf-8') as f:
             full_data = json.load(f)
 
         self.data = full_data
@@ -60,7 +60,7 @@ class JsonSettings:
         :type new_data: dict
         """
         self.data[block_key] = new_data
-        with open(self.filename, 'w') as f:
+        with open(self.filename, 'w', encoding='utf-8') as f:
             json.dump(self.data, f, indent=4)
 
     def get(self, key: list):

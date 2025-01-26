@@ -1,91 +1,248 @@
 {
     "global setting": {},
     "test setting": {
-        "Setting block 1": {
-            "dropdown test": {
+        "tab1": {
+            "textbox1": {
+                "type": "string",
+                "value": "value1",
+                "default": "default value1"
+            },
+            "int": {
+                "type": "int",
+                "value": 1,
+                "default": 1
+            },
+            "float": {
+                "type": "float",
+                "value": 0.1,
+                "default": 0.1
+            },
+            "bool": {
+                "type": "bool",
+                "value": true,
+                "default": true
+            },
+            "color": {
+                "type": "color",
+                "value": "#ff0000",
+                "default": "#ff0000"
+            },
+            "dropdown": {
                 "type": "dropdown",
-                "value": "test3",
+                "value": "Option 1",
                 "options": [
                     "Option 1",
                     "Option 2",
-                    "test3"
+                    "Option 3"
                 ],
-                "auto": true,
-                "default": true,
-                "advanced": true
-            },
-            "test string": {
+                "default": "Option 1"
+            }
+        },
+        "str": {
+            "textbox1": {
                 "type": "string",
-                "value": "test",
-                "default": "test",
-                "advanced": true
+                "value": "value1",
+                "default": "default value1"
             },
-            "test string2": {
+            "textbox2": {
                 "type": "string",
-                "value": "",
-                "auto": false,
-                "default": false,
-                "advanced": false
-            },
-            "test float": {
-                "type": "float",
-                "value": 0.2,
-                "default": 0.2
-            },
-            "test float2": {
-                "type": "float",
-                "value": 0.0,
+                "value": "value2",
                 "auto": false
             },
-            "test_bool": {
+            "textbox3": {
+                "type": "string",
+                "value": "value3",
+                "auto": true,
+                "default": false
+            },
+            "textbox4": {
+                "type": "string",
+                "value": "value4",
+                "default": "default value4",
+                "advanced": false
+            },
+            "textbox5": {
+                "type": "string",
+                "value": "value5",
+                "default": "default value5",
+                "advanced": true
+            }
+        },
+        "bool": {
+            "checkbox1": {
+                "type": "bool",
+                "value": true,
+                "default": true
+            },
+            "checkbox2": {
                 "type": "bool",
                 "value": false,
                 "default": false
             },
-            "test_int": {
-                "type": "int",
-                "value": 4,
-                "default": 4
+            "checkbox3": {
+                "type": "bool",
+                "value": true,
+                "default": true,
+                "advanced": true
+            }
+        },
+        "float": {
+            "float1": {
+                "type": "float",
+                "value": 0.1,
+                "default": 0.1
             },
-            "test_color": {
+            "float2": {
+                "type": "float",
+                "value": 0.1,
+                "default": 0.2,
+                "range": [
+                    0.1,
+                    0.3
+                ]
+            },
+            "float3": {
+                "type": "float",
+                "value": 0.3,
+                "default": 0.3,
+                "auto": true
+            },
+            "float4": {
+                "type": "float",
+                "value": 0.3,
+                "default": 0.3,
+                "auto": false
+            },
+            "float5": {
+                "type": "float",
+                "value": 0.3,
+                "default": 0.3,
+                "advanced": true
+            }
+        },
+        "int": {
+            "int1": {
+                "type": "int",
+                "value": 1,
+                "default": 2
+            },
+            "int2": {
+                "type": "int",
+                "value": 1,
+                "default": 200,
+                "range": [
+                    0,
+                    200
+                ]
+            },
+            "int3": {
+                "type": "int",
+                "value": 1,
+                "default": 0,
+                "auto": true
+            },
+            "int4": {
+                "type": "int",
+                "value": 1,
+                "default": 0,
+                "auto": false
+            },
+            "int5": {
+                "type": "int",
+                "value": 1,
+                "default": 0,
+                "advanced": true
+            }
+        },
+        "dropdown": {
+            "dropdown1": {
+                "type": "dropdown",
+                "value": "Option 1",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+                ],
+                "default": "Option 1"
+            },
+            "dropdown2": {
+                "type": "dropdown",
+                "value": "Option 1",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+                ],
+                "default": "Option 2",
+                "auto": true
+            },
+            "dropdown3": {
+                "type": "dropdown",
+                "value": "Option 1",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+                ],
+                "default": "Option 3",
+                "auto": false
+            },
+            "dropdown4": {
+                "type": "dropdown",
+                "value": "Option 1",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+                ],
+                "default": "Option 3",
+                "advanced": false
+            },
+            "dropdown5": {
+                "type": "dropdown",
+                "value": "Option 1",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+                ],
+                "default": "Option 3",
+                "advanced": true
+            }
+        },
+        "color": {
+            "color1": {
                 "type": "color",
                 "value": "#68ff7f",
                 "default": "#68ff7f"
             },
-            "color options": {
+            "color2": {
                 "type": "color",
-                "value": "#ff7f0e",
-                "default": "#68ff7f",
+                "value": "#ff0000",
+                "default": "#ff0000",
                 "options": [
-                    "#1f77b4",
-                    "#ff7f0e",
-                    "#2ca02c"
-                ]
-            }
-        },
-        "Setting block 2": {
-            "title": {
-                "type": "string",
-                "value": "bar",
-                "default": "bar"
-            },
-            "test float": {
-                "type": "float",
-                "value": 0.2,
-                "default": 0.2,
-                "range": [
-                    -99.1,
-                    1
+                    "#ff0000",
+                    "#00ff00",
+                    "#0000ff"
                 ]
             },
-            "test int": {
-                "type": "int",
-                "value": 2,
-                "default": 2,
-                "range": [
-                    -99,
-                    10
-                ]
+            "color3": {
+                "type": "color",
+                "value": "#ff0000",
+                "default": "#ff7f0e",
+                "auto": true
+            },
+            "color4": {
+                "type": "color",
+                "value": "#1f77b4",
+                "default": "#1f77b4",
+                "auto": false
+            },
+            "color5": {
+                "type": "color",
+                "value": "#ff0000",
+                "default": "#ff0000",
+                "advanced": true
             }
         }
     },
